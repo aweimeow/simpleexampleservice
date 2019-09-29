@@ -45,13 +45,16 @@ message SimpleExampleServiceInstance (ServiceInstanceWithCompute2){
      required string tenant_message = 1 [
          help_text = "Tenant Message to Display",
          max_length = 256];
-     optional manytoone foreground_color->ColorNew:serviceinstance_foreground_colors = 2:1001 [
+     required string tenant_image = 2 [
+         help_text = "Tenant image in web page",
+         max_length = 256];
+     optional manytoone foreground_color->ColorNew:serviceinstance_foreground_colors = 3:1001 [
          help_text = "Foreground color to use in web page",
          db_index = True];
-     optional manytoone background_color->ColorNew:serviceinstance_background_colors = 3:1002 [
+     optional manytoone background_color->ColorNew:serviceinstance_background_colors = 4:1002 [
          help_text = "Background color to use in web page",
          db_index = True];
-     optional string tenant_secret = 4 [
+     optional string tenant_secret = 5 [
          help_text = "Tenant Secret to place in a file",
          text = True];
 }

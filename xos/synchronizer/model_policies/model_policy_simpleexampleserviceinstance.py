@@ -17,6 +17,7 @@ import base64
 import jinja2
 import json
 import os
+import datetime
 from xossynchronizer.model_policies.policy import Policy
 
 from xosconfig import Config
@@ -37,6 +38,7 @@ class SimpleExampleServiceInstancePolicy(Policy):
         fields = {}
         fields['tenant_message'] = service_instance.tenant_message
         fields['service_message'] = service.service_message
+        fields['tenant_image'] = service_instance.tenant_image
 
         if service_instance.foreground_color:
             fields["foreground_color"] = service_instance.foreground_color.html_code
@@ -49,6 +51,7 @@ class SimpleExampleServiceInstancePolicy(Policy):
             images.append({"name": image.name,
                            "url": image.url})
         fields["images"] = images
+        fields["render_time"] = str(datetime.datetime.now())
 
         template_fn = os.path.join(os.path.abspath(os.path.dirname(os.path.realpath(__file__))), "index.html.j2")
         template = jinja2.Template(open(template_fn).read())

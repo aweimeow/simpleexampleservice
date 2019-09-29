@@ -32,12 +32,17 @@ class SimpleExampleEventStep(EventStep):
     def process_event(self, event):
         value = json.loads(event.value)
         service_instance_name = value["service_instance"]
-        tenant_message = value["tenant_message"]
 
         objs = self.model_accessor.SimpleExampleServiceInstance.objects.filter(name=service_instance_name)
         if not objs:
             raise Exception("failed to find %s" % service_instance_name)
 
         for obj in objs:
-            obj.tenant_message = tenant_message
+            if "tenant_message" in value:
+                tenant_message = value["tenant_message"]
+                obj.tenant_message = tenant_message
+            if "tenant_image" in value:
+                tenant_image = value["tenant_image"]
+                obj.tenant_image = tenant_image
+
             obj.save(always_update_timestamp=True)

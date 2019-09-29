@@ -34,6 +34,7 @@ topology_template:
       properties:
         name: "My Simple Example Service Instance"
         tenant_message: "world"
+        tenant_image: "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg"
         tenant_secret: "p@ssw0rd"
       requirements:
         - owner:
